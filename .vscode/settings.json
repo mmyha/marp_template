@@ -1,0 +1,5 @@
+{
+	"markdown.marp.themes": ["./theme/template.css"],
+	"markdown-preview-enhanced.hideDefaultVSCodeMarkdownPreviewButtons": false,
+	"markdown.marp.enableHtml": true
+}
