@@ -58,6 +58,18 @@ section.normal h1 {
 }
 section.normal h2 {
 	font-size: 1.5rem;
+	color: #000;
+}
+section.normal h2::before {
+	content: "◾️";
+	margin-right: 10px;
+}
+section.normal h2 strong {
+	color: #000;
+}
+
+section.normal h3 strong {
+	color: #000;
 }
 
 section li {
@@ -65,7 +77,6 @@ section li {
 }
 
 section strong {
-	font-size: 1.2rem;
 	background: linear-gradient(transparent 65%, rgb(255, 217, 0) 0%);
 }
 
