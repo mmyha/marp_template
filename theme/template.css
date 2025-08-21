@@ -40,6 +40,7 @@ section h1 {
 /* スライド番号 */
 section::after {
 	color: var(--text-sub-color);
+	font-size: 1.2rem;
 	content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
 }
 
@@ -64,12 +65,12 @@ section.title {
 	text-align: center;
 }
 section.title h1 {
-	font-size: 3.5rem;
+	font-size: 2rem;
 }
 section.title h2 {
 	color: var(--text-sub-color);
 	font-weight: normal;
-	font-size: 1.8rem;
+	font-size: 1.6rem;
 }
 section.title footer {
 	color: var(--text-sub-color);
