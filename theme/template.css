@@ -4,30 +4,62 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap");
 
 /**
+ * 定数
+ */
+:root {
+	--font-family: "Noto Sans JP", sans-serif;
+	--default-font-size: 20px;
+	--default-text-color: #00234b;
+	--text-sub-color: #b3b3b3;
+	--background-color: #f7f7f7;
+	--marker-color: #ffd43d;
+	--block-container-color: #dcf0ff;
+	--blockquote-border-color: #cccccc;
+	--slide-padding: 30px;
+}
+
+/**
  * 全体適用
  */
 section {
-	/* default fontSize */
-	font-size: 20px;
-	color: rgb(0, 0, 0);
-	justify-content: start;
-	padding: 40px;
-	font-family: "Noto Sans JP", sans-serif;
+	font-size: var(--default-font-size);
+	color: var(--default-text-color);
+	background-color: var(--background-color);
+	padding: var(--slide-padding);
+	font-family: var(--font-family);
+}
+
+section footer {
+	color: var(--text-sub-color);
 }
 
 section h1 {
-	color: rgb(0, 0, 0);
+	color: var(--default-text-color);
 }
 
 /* スライド番号 */
 section::after {
+	color: var(--text-sub-color);
 	content: attr(data-marpit-pagination) " / " attr(data-marpit-pagination-total);
+}
+
+section blockquote {
+	font-size: 0.8rem;
+	position: absolute;
+	bottom: 60px;
+	width: 100%;
+	width: 90%;
+	padding-left: 2px;
+	left: 30px;
+	border-top: 0.5px solid var(--blockquote-border-color);
+	border-left: none;
 }
 
 /**
  * タイトル
  */
 section.title {
+	display: flex;
 	justify-content: center;
 	text-align: center;
 }
@@ -35,11 +67,12 @@ section.title h1 {
 	font-size: 3.5rem;
 }
 section.title h2 {
-	color: rgb(140, 140, 140);
+	color: var(--text-sub-color);
 	font-weight: normal;
 	font-size: 1.8rem;
 }
 section.title footer {
+	color: var(--text-sub-color);
 	font-size: 1.5rem;
 	justify-self: center;
 	text-align: center;
@@ -52,26 +85,29 @@ section.title footer {
 /**
  * 通常のセクション
  */
+section.normal {
+	place-content: start;
+}
 section.normal h1 {
 	font-size: 2rem;
-	border-bottom: 1px solid rgb(0, 0, 0);
-	border-left: 8px solid rgb(0, 0, 0);
+	/* border-bottom: 1px solid rgb(0, 0, 0); */
+	border-left: 8px solid #97d3ff;
 	padding-left: 15px;
 }
 section.normal h2 {
 	font-size: 1.5rem;
-	color: #000;
+	color: var(--default-text-color);
 }
 section.normal h2::before {
 	content: "◾️";
 	margin-right: 10px;
 }
 section.normal h2 strong {
-	color: #000;
+	color: var(--default-text-color);
 }
 
 section.normal h3 strong {
-	color: #000;
+	color: var(--default-text-color);
 }
 
 section li {
@@ -79,32 +115,21 @@ section li {
 }
 
 section strong {
-	background: linear-gradient(transparent 65%, rgb(255, 217, 0) 0%);
+	background: linear-gradient(transparent 65%, var(--marker-color) 0%);
 }
 
 section .block {
 	padding: 20px;
 	margin: 15px 0px 15px;
 	border-radius: 5px;
-	background-color: rgb(240, 240, 240);
-}
-
-section blockquote {
-	font-size: 0.8rem;
-	position: absolute;
-	bottom: 60px;
-	width: 100%;
-	width: 90%;
-	padding-left: 2px;
-	left: 30px;
-	border-top: 0.5px solid rgb(0, 0, 0);
-	border-left: none;
+	background-color: var(--block-container-color);
 }
 
 /**
  * Center
  */
 section.center {
+	display: flex;
 	justify-content: center;
 	text-align: center;
 }
