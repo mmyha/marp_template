@@ -15,7 +15,11 @@
 	--marker-color: #ffd43d;
 	--block-container-color: #dcf0ff;
 	--blockquote-border-color: #cccccc;
+	--default-arrow-color: #008bf2;
 	--slide-padding: 30px;
+
+	/* 矢印の向き: right, left, up, down */
+	--arrow-direction: right;
 }
 
 /**
@@ -34,6 +38,7 @@ section footer {
 }
 
 section h1 {
+	font-size: 2rem;
 	color: var(--default-text-color);
 }
 
@@ -88,6 +93,7 @@ section.title footer {
  */
 section.normal {
 	place-content: start;
+	display: block;
 }
 section.normal h1 {
 	font-size: 2rem;
@@ -111,12 +117,41 @@ section.normal h3 strong {
 	color: var(--default-text-color);
 }
 
+.content-center {
+	position: absolute;
+	inset: var(--slide-padding);
+	display: grid;
+	place-items: center;
+	width: auto;
+	height: auto;
+	z-index: 1;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	/* デフォルト値を fallback に設定 */
+	align-items: var(--cross, flex-start);
+	justify-content: var(--main, flex-start);
+}
+
+.padding {
+	padding: var(--padding);
+	height: 100%;
+}
+
 section li {
 	font-size: 1rem;
 }
 
 section strong {
-	background: linear-gradient(transparent 65%, var(--marker-color) 0%);
+	background: linear-gradient(transparent 70%, var(--marker-color) 0%);
 }
 
 section .block {
@@ -126,6 +161,17 @@ section .block {
 	background-color: var(--block-container-color);
 }
 
+section .block-title {
+	padding: 8px 30px;
+	margin: var(--margin, 10px 50px 10px 10px);
+	font-size: 1.5rem;
+	font-weight: bold;
+	display: inline-block;
+	border-radius: 5px;
+	background-color: var(--block-container-color);
+	/* margin-bottom: 10px; */
+}
+
 /**
  * Center
  */
@@ -133,4 +179,116 @@ section.center {
 	display: flex;
 	justify-content: center;
 	text-align: center;
+}
+
+/**
+ * 矢印 - 方向可変対応（修正版）
+ */
+.arrow {
+	position: relative;
+	display: inline-block;
+	--color: var(--arrow-color, var(--default-arrow-color));
+	width: var(--arrow-width, 20px);
+	height: var(--arrow-height, 30px);
+	margin: var(--arrow-margin, 15px);
+}
+
+.arrow::before,
+.arrow::after {
+	content: "";
+	position: absolute;
+	top: calc(50% - 2px);
+	right: 0;
+	width: 40px;
+	height: 4px;
+	border-radius: 9999px;
+	background-color: var(--color);
+	transform-origin: calc(100% - 2px) 50%;
+}
+
+/* 右向き矢印（デフォルト） */
+.arrow::before {
+	transform: rotate(45deg);
+}
+
+.arrow::after {
+	transform: rotate(-45deg);
+}
+
+/* 左向き矢印 */
+.arrow[data-direction="left"]::before,
+.arrow[data-direction="left"]::after {
+	right: auto;
+	left: 0;
+	transform-origin: 2px 50%;
+}
+
+.arrow[data-direction="left"]::before {
+	transform: rotate(-45deg);
+}
+
+.arrow[data-direction="left"]::after {
+	transform: rotate(45deg);
+}
+
+/* 上向き矢印 */
+.arrow[data-direction="up"] {
+	width: 62px;
+	height: 33px;
+}
+
+.arrow[data-direction="up"]::before,
+.arrow[data-direction="up"]::after {
+	top: 0;
+	right: calc(50% - 2px);
+	width: 4px;
+	height: 45px;
+	transform-origin: 50% 2px;
+}
+
+.arrow[data-direction="up"]::before {
+	transform: rotate(45deg);
+}
+
+.arrow[data-direction="up"]::after {
+	transform: rotate(-45deg);
+}
+
+/* 下向き矢印 */
+.arrow[data-direction="down"] {
+	width: 62px;
+	height: 33px;
+}
+
+.arrow[data-direction="down"]::before,
+.arrow[data-direction="down"]::after {
+	top: auto;
+	bottom: 0;
+	right: calc(50% - 2px);
+	width: 4px;
+	height: 45px;
+	transform-origin: 50% calc(100% - 2px);
+}
+
+.arrow[data-direction="down"]::before {
+	transform: rotate(-45deg);
+}
+
+.arrow[data-direction="down"]::after {
+	transform: rotate(45deg);
+}
+/* CSS変数が left の場合 */
+section:has([style*="--arrow-direction: left"]) .arrow::before,
+section:has([style*="--arrow-direction: left"]) .arrow::after {
+	right: auto;
+	left: 0;
+	transform-origin: 2px 50%;
+}
+
+section:has([style*="--arrow-direction: left"]) .arrow::before {
+	transform: rotate(-45deg);
+}
+
+section:has([style*="--arrow-direction: left"]) .arrow::after {
+	transform: rotate(45deg);
 }
